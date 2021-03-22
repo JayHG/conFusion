@@ -53,6 +53,8 @@ export class DishdetailComponent implements OnInit {
 
   dish = DISH;
 
+  comment = DISH.comments
+
   constructor() { }
 
   ngOnInit(): void {

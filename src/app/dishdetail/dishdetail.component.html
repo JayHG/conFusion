@@ -27,10 +27,10 @@
 
   <div fxFlex="40">
     <h2>Comments</h2>
-    <mat-list *ngIf="dish">
-      <mat-list-item >
-        <p>{{dish.comments.comment}}
-      </mat-list-item>
+    <mat-list *ngFor="let comment of dish.comments">
+      <mat-list-item><br /> {{comment.comment}}<br />
+        {{comment.rating}} stars<br />
+    -- {{comment.author}} {{comment.date | date}}<br /></mat-list-item><br />
     </mat-list>
   </div>
 
