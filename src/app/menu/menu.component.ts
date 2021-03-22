@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Dish } from '../shared/dish';
 
-
 const DISHES: Dish[] = [
     {
       id: '0',
@@ -61,5 +60,5 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
+
