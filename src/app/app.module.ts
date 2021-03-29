@@ -45,7 +45,7 @@ import { PromotionService } from './services/promotion.service';
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [DishService, PromotionService],
   bootstrap: [AppComponent]
