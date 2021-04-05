@@ -7,6 +7,8 @@ import { DISHES } from '../shared/dishes';
 })
 export class DishService {
 
+  constructor() { }
+
   getDishes(): Dish[] {
     return DISHES;
   }
@@ -18,6 +20,4 @@ export class DishService {
   getFeaturedDish(): Dish {
     return DISHES.filter((dish) => dish.featured)[0];
   }
-
-  constructor() { }
 }
