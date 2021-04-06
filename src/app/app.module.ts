@@ -9,11 +9,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import 'hammerjs';
 import { MenuComponent } from './menu/menu.component';
-import { MatDialogModule } from '@angular/material/dialog';
+
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
 import { DishService } from './services/dish.service';
 import { HeaderComponent } from './header/header.component';
@@ -51,10 +53,16 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     MatDialogModule
   ],
-  providers: [DishService, PromotionService, LeaderService],
-    entryComponents: [
+  providers: [
+    DishService,
+    PromotionService,
+    LeaderService
+  ],
+
+  entryComponents: [
         LoginComponent
   ],
+
   bootstrap: [AppComponent]
 
 })
