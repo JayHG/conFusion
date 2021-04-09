@@ -8,6 +8,7 @@ import { switchMap } from 'rxjs/operators';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../shared/comment';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   selector: 'app-dishdetail',
@@ -49,7 +50,7 @@ export class DishdetailComponent implements OnInit {
 
   createForm() {
     this.commentForm = this.fb.group({
-      rating: '',
+      rating: '5',
       comment: '',
       author: '',
       date: ''
