@@ -23,7 +23,7 @@ export class DishdetailComponent implements OnInit {
   next: string;
   commentForm: FormGroup;
   comment: Comment;
-  @ViewChild('fform') commentFormDirective;
+  @ViewChild('cform') commentFormDirective;
 
   formErrors = {
     'author': '',
@@ -67,7 +67,7 @@ export class DishdetailComponent implements OnInit {
   createForm(): void {
     this.commentForm = this.fb.group({
       comment: ['', [Validators.required]],
-      rating: '5',
+      rating: 5,
       author: ['', [Validators.required, Validators.minLength(2)] ],
     });
 
@@ -100,9 +100,13 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     this.comment = this.commentForm.value;
     console.log(this.comment);
+    var d = new Date();
+    var n = d.toISOString();
+    this.comment.date=n;
+    this.dish.comments.push(this.comment);
     this.commentForm.reset({
       author: '',
-      rating: '5',
+      rating: 5,
       comment: ''
     });
     this.commentFormDirective.resetForm();

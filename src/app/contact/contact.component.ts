@@ -52,17 +52,16 @@ export class ContactComponent implements OnInit {
     this.feedbackForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-      telnum: ['', [Validators.required, Validators.pattern] ],
+      telnum: [0, [Validators.required, Validators.pattern] ],
       email: ['', [Validators.required, Validators.email] ],
       agree: false,
       contacttype: 'None',
       message: ''
     });
 
-    this.feedbackForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
+    this.feedbackForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
-    this.onValueChanged(); // (re)set validation messages now
+    this.onValueChanged(); // (re)set form validation messages
   }
 
   onValueChanged(data?: any) {
