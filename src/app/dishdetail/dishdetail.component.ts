@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
 
@@ -23,6 +23,22 @@ export class DishdetailComponent implements OnInit {
   next: string;
   commentForm: FormGroup;
   comment: Comment;
+  @ViewChild('fform') commentFormDirective;
+
+  formErrors = {
+    'author': '',
+    'comment': ''
+  };
+
+  validationMessages = {
+    'author': {
+      'required':      'Name is required.',
+      'minlength':     'Name must be at least 2 characters long.'
+    },
+    'comment': {
+      'required':      'Comment is required.'
+    },
+  };
 
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
@@ -48,19 +64,48 @@ export class DishdetailComponent implements OnInit {
   }
 
 
-  createForm() {
+  createForm(): void {
     this.commentForm = this.fb.group({
+      comment: ['', [Validators.required]],
       rating: '5',
-      comment: '',
-      author: '',
-      date: ''
+      author: ['', [Validators.required, Validators.minLength(2)] ],
     });
+
+    this.commentForm.valueChanges
+      .subscribe(data => this.onValueChanged(data));
+
+    this.onValueChanged(); // (re)set validation messages now
+  }
+
+  onValueChanged(data?: any) {
+    if (!this.commentForm) { return; }
+    const form = this.commentForm;
+    for (const field in this.formErrors) {
+      if (this.formErrors.hasOwnProperty(field)) {
+        // clear previous error message (if any)
+        this.formErrors[field] = '';
+        const control = form.get(field);
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for (const key in control.errors) {
+            if (control.errors.hasOwnProperty(key)) {
+              this.formErrors[field] += messages[key] + ' ';
+            }
+          }
+        }
+      }
+    }
   }
 
   onSubmit() {
     this.comment = this.commentForm.value;
     console.log(this.comment);
-    this.commentForm.reset();
+    this.commentForm.reset({
+      author: '',
+      rating: '5',
+      comment: ''
+    });
+    this.commentFormDirective.resetForm();
   }
 
 }
